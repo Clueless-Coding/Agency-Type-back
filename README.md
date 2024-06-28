@@ -57,7 +57,7 @@ This repository contains the backend code for the Agency-Type application. It pr
 5. **Run the database migrations:**
 
     ```sh
-    goose -dir \internal\pkg\database\migrations postgres "postgres://postgres:postgres@localhost:5432/postgres" up
+    goose -dir \internal\pkg\database\migrations postgres "postgres://postgres:123@localhost:5432/postgres" up
     ```
 
 6. **Run the application:**
