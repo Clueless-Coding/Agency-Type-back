@@ -57,7 +57,7 @@ This repository contains the backend code for the Agency-Type application. It pr
 5. **Run the database migrations:**
 
     ```sh
-    goose -dir \internal\pkg\database\migrations postgres "postgres://postgres:123@localhost:5432/postgres" up
+    goose -dir \internal\database\migrations postgres "postgres://postgres:123@localhost:5432/postgres" up
     ```
 
 6. **Run the application:**
@@ -74,16 +74,163 @@ This repository contains the backend code for the Agency-Type application. It pr
 ### Authentication
 
 - **POST /register** - Register a new user.
+    
+    *Request*
+
+    ```js
+    {
+    "login": string,
+    "password": string
+    }
+    ```
+
+    *Response*
+
+    ```js
+    {
+    "message": "User registered successfully",
+    "token": string
+    }
+    ```
+
+
 - **POST /login** - Login an existing user.
+
+    *Request*
+
+    ```js
+    {
+    "login": string,
+    "password": string
+    }
+    ```
+
+    *Response*
+
+    ```js
+    {
+    "message": "Login successful",
+    "token": int
+    }
+    ```
 
 ### Results
 
 - **POST /results** - Create a new result (requires authentication).
-- **GET /results** - Get all results for a user.
+
+    *Request*
+
+    **header**
+    | Key       | Value       |
+    |-----------|-------------|
+    | token     | string      |
+
+    
+    ```js
+    {
+    "login": string,
+    "password": string
+    }
+    ```
+
+    *Response*
+
+    ```js
+    {
+    "message": "Result created successfully"
+    }
+    ```
+
+- **GET /results/** - Get all results for a user.
+
+    *Request*
+
+    **Query Params**
+    | Key       | Value       |
+    |-----------|-------------|
+    | user_id   | int         |
+
+    *Response*
+
+    ```js
+    [
+    {
+        "id": int,
+        "user_id": int,
+        "game_mode": str,
+        "start_time": time.Time,
+        "duration": time.Time,
+        "misstakes": int,
+        "accuracy": float,
+        "count_words": int
+    }
+    ]
+    ```
+
+
 - **GET /results/:id** - Get a specific result by ID.
+
+    *Response*
+
+    ```js
+    [
+    {
+        "id": int,
+        "user_id": int,
+        "game_mode": str,
+        "start_time": time.Time,
+        "duration": time.Time,
+        "misstakes": int,
+        "accuracy": float,
+        "count_words": int
+    }
+    ]
+    ```
 
 ### Records
 
 - **GET /records/:gamemode** - Get global records for a specific game mode.
+
+    *Response*
+
+    ```js
+    [
+    {
+        "id": int,
+        "user_id": int,
+        "game_mode": str,
+        "start_time": time.Time,
+        "duration": time.Time,
+        "misstakes": int,
+        "accuracy": float,
+        "count_words": int
+    }
+    ]
+    ```
+
 - **GET /records** - Get user-specific records.
 
+    *Request*
+
+    **Query Params**
+    | Key       | Value       |
+    |-----------|-------------|
+    | user_id   | int         |
+
+
+    *Response*
+
+    ```js
+    [
+    {
+        "id": int,
+        "user_id": int,
+        "game_mode": str,
+        "start_time": time.Time,
+        "duration": time.Time,
+        "misstakes": int,
+        "accuracy": float,
+        "count_words": int
+    }
+    ]
+    ```
