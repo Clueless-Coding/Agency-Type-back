@@ -5,7 +5,7 @@ import "time"
 type Result struct {
 	ID        int       `json:"id"`
 	UserID    int       `json:"user_id"`
-	GameMode  string    `json:"gamemode"`
+	GameMode  string    `json:"game_mode"`
 	StartTime time.Time `json:"start_time"`
 	Duration  time.Time `json:"duration"`
 	Misstakes int       `json:"misstakes"`

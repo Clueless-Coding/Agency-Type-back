@@ -4,7 +4,6 @@ import (
 	"Agency-Type-back/internal/app/models"
 	"Agency-Type-back/internal/app/utils"
 	"database/sql"
-	"fmt"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -19,9 +18,8 @@ func NewResultHandler(db *sql.DB) echo.HandlerFunc {
 			return utils.BuildErrorResponse(ctx, http.StatusBadRequest, "Invalid request payload")
 		}
 
-		_, err := db.Exec("INSERT INTO results (user_id, duration) VALUES ($1, $2)", userID, result.Duration)
+		_, err := db.Exec("INSERT INTO results (user_id,game_mode,duration,misstakes,accuracy,count_words) VALUES ($1, $2, $3, $4, $5, $6)", userID, result.GameMode, result.Duration, result.Misstakes, result.Accuracy, result.Words)
 		if err != nil {
-			fmt.Println(err)
 			return utils.BuildErrorResponse(ctx, http.StatusInternalServerError, "Failed to create result")
 		}
 		return ctx.JSON(http.StatusCreated, map[string]string{"message": "Result created successfully"})
