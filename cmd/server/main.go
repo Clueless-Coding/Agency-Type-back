@@ -3,7 +3,7 @@ package main
 import (
 	"Agency-Type-back/internal/app/handlers"
 	"Agency-Type-back/internal/app/middleware"
-	"Agency-Type-back/internal/pkg/database"
+	"Agency-Type-back/internal/database"
 	"log"
 
 	"github.com/labstack/echo/v4"
@@ -18,6 +18,7 @@ func main() {
 	defer db.Close()
 
 	app := echo.New()
+
 	app.Use(echoMiddleware.Logger())
 	app.Use(echoMiddleware.Recover())
 	app.Use(echoMiddleware.CORS())
