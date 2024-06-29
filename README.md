@@ -128,8 +128,11 @@ This repository contains the backend code for the Agency-Type application. It pr
     
     ```js
     {
-    "login": string,
-    "password": string
+    "game_mode": string,
+    "duration": time.Time,
+    "misstakes": int,
+    "accuracy": float,
+    "count_words": int
     }
     ```
 
@@ -157,7 +160,7 @@ This repository contains the backend code for the Agency-Type application. It pr
     {
         "id": int,
         "user_id": int,
-        "game_mode": str,
+        "game_mode": string,
         "start_time": time.Time,
         "duration": time.Time,
         "misstakes": int,
@@ -177,7 +180,7 @@ This repository contains the backend code for the Agency-Type application. It pr
     {
         "id": int,
         "user_id": int,
-        "game_mode": str,
+        "game_mode": string,
         "start_time": time.Time,
         "duration": time.Time,
         "misstakes": int,
@@ -198,7 +201,7 @@ This repository contains the backend code for the Agency-Type application. It pr
     {
         "id": int,
         "user_id": int,
-        "game_mode": str,
+        "game_mode": string,
         "start_time": time.Time,
         "duration": time.Time,
         "misstakes": int,
@@ -225,7 +228,7 @@ This repository contains the backend code for the Agency-Type application. It pr
     {
         "id": int,
         "user_id": int,
-        "game_mode": str,
+        "game_mode": string,
         "start_time": time.Time,
         "duration": time.Time,
         "misstakes": int,
