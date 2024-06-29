@@ -57,14 +57,14 @@ This repository contains the backend code for the Agency-Type application. It pr
 5. **Run the database migrations:**
 
     ```sh
-    goose -dir \internal\database\migrations postgres "postgres://postgres:123@localhost:5432/postgres" up
+    goose -dir .\internal\database\migrations postgres "postgres://postgres:PASSWORD@localhost:5432/postgres" up
     ```
 
 6. **Run the application:**
 
     ```sh
     cd .\cmd\server
-    go run main.go
+    go run .
     ```
 
     The server will start running on `http://localhost:8080`.
