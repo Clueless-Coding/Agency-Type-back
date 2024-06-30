@@ -10,8 +10,8 @@ CREATE TABLE results (
     mistakes int NOT NULL,
     accuracy FLOAT NOT NULL,
     count_words int NOT NULL,
-    wpn FLOAT NOT NULL,
-    cpn FLOAT NOT NULL,
+    wpm FLOAT NOT NULL,
+    cpm FLOAT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 -- +goose StatementEnd

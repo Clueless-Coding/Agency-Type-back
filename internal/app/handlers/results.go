@@ -19,7 +19,7 @@ func NewResultHandler(db *sql.DB) echo.HandlerFunc {
 			return utils.BuildErrorResponse(ctx, http.StatusBadRequest, "Invalid request payload")
 		}
 
-		_, err := db.Exec("INSERT INTO results (user_id,game_mode,duration,mistakes,accuracy,count_words,wpn,cpn) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", userID, result.GameMode, result.Duration, result.Mistakes, result.Accuracy, result.Words, result.WPN, result.CPN)
+		_, err := db.Exec("INSERT INTO results (user_id,game_mode,duration,mistakes,accuracy,count_words,wpm,cpm) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", userID, result.GameMode, result.Duration, result.Mistakes, result.Accuracy, result.Words, result.WPM, result.CPM)
 		if err != nil {
 			return utils.BuildErrorResponse(ctx, http.StatusInternalServerError, "Failed to create result")
 		}
@@ -45,7 +45,7 @@ func UserResultsHandler(db *sql.DB) echo.HandlerFunc {
 		var results []models.Result
 		for rows.Next() {
 			var result models.Result
-			if err := rows.Scan(&result.ID, &result.UserID, &result.GameMode, &result.StartTime, &result.Duration, &result.Mistakes, &result.Accuracy, &result.Words, &result.WPN, &result.CPN); err != nil {
+			if err := rows.Scan(&result.ID, &result.UserID, &result.GameMode, &result.StartTime, &result.Duration, &result.Mistakes, &result.Accuracy, &result.Words, &result.WPM, &result.CPM); err != nil {
 				fmt.Println(err)
 				return utils.BuildErrorResponse(ctx, http.StatusInternalServerError, "Failed to scan results")
 			}
@@ -73,7 +73,7 @@ func ResultHandler(db *sql.DB) echo.HandlerFunc {
 		row := db.QueryRow("SELECT * FROM results WHERE id = $1", resultID)
 
 		var result models.Result
-		if err := row.Scan(&result.ID, &result.UserID, &result.GameMode, &result.StartTime, &result.Duration, &result.Mistakes, &result.Accuracy, &result.Words, &result.WPN, &result.CPN); err != nil {
+		if err := row.Scan(&result.ID, &result.UserID, &result.GameMode, &result.StartTime, &result.Duration, &result.Mistakes, &result.Accuracy, &result.Words, &result.WPM, &result.CPM); err != nil {
 			return utils.BuildErrorResponse(ctx, http.StatusInternalServerError, "Failed to scan result")
 		}
 

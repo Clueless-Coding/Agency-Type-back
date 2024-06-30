@@ -135,8 +135,8 @@ This repository contains the backend code for the Agency-Type application. It pr
     "misstakes": int,
     "accuracy": float,
     "count_words": int,
-    "wpn": float,
-    "cpn": float
+    "wpm": float,
+    "cpm": float
     }
     ```
 
@@ -170,8 +170,8 @@ This repository contains the backend code for the Agency-Type application. It pr
         "misstakes": int,
         "accuracy": float,
         "count_words": int,
-        "wpn": float,
-        "cpn": float
+        "wpm": float,
+        "cpm": float
     }
     ]
     ```
@@ -192,8 +192,8 @@ This repository contains the backend code for the Agency-Type application. It pr
         "misstakes": int,
         "accuracy": float,
         "count_words": int,
-        "wpn": float,
-        "cpn": float
+        "wpm": float,
+        "cpm": float
     }
     ]
     ```
@@ -215,8 +215,8 @@ This repository contains the backend code for the Agency-Type application. It pr
         "misstakes": int,
         "accuracy": float,
         "count_words": int,
-        "wpn": float,
-        "cpn": float
+        "wpm": float,
+        "cpm": float
     }
     ]
     ```
@@ -244,8 +244,8 @@ This repository contains the backend code for the Agency-Type application. It pr
         "misstakes": int,
         "accuracy": float,
         "count_words": int,
-        "wpn": float,
-        "cpn": float
+        "wpm": float,
+        "cpm": float
     }
     ]
     ```
