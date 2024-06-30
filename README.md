@@ -90,6 +90,7 @@ This repository contains the backend code for the Agency-Type application. It pr
     {
     "message": "User registered successfully",
     "token": string
+    "user_id": int
     }
     ```
 
@@ -110,7 +111,8 @@ This repository contains the backend code for the Agency-Type application. It pr
     ```js
     {
     "message": "Login successful",
-    "token": int
+    "token": string
+    "user_id": int
     }
     ```
 
@@ -132,7 +134,9 @@ This repository contains the backend code for the Agency-Type application. It pr
     "duration": time.Time,
     "misstakes": int,
     "accuracy": float,
-    "count_words": int
+    "count_words": int,
+    "wpn": float,
+    "cpn": float
     }
     ```
 
@@ -165,7 +169,9 @@ This repository contains the backend code for the Agency-Type application. It pr
         "duration": time.Time,
         "misstakes": int,
         "accuracy": float,
-        "count_words": int
+        "count_words": int,
+        "wpn": float,
+        "cpn": float
     }
     ]
     ```
@@ -185,7 +191,9 @@ This repository contains the backend code for the Agency-Type application. It pr
         "duration": time.Time,
         "misstakes": int,
         "accuracy": float,
-        "count_words": int
+        "count_words": int,
+        "wpn": float,
+        "cpn": float
     }
     ]
     ```
@@ -206,7 +214,9 @@ This repository contains the backend code for the Agency-Type application. It pr
         "duration": time.Time,
         "misstakes": int,
         "accuracy": float,
-        "count_words": int
+        "count_words": int,
+        "wpn": float,
+        "cpn": float
     }
     ]
     ```
@@ -233,7 +243,9 @@ This repository contains the backend code for the Agency-Type application. It pr
         "duration": time.Time,
         "misstakes": int,
         "accuracy": float,
-        "count_words": int
+        "count_words": int,
+        "wpn": float,
+        "cpn": float
     }
     ]
     ```
