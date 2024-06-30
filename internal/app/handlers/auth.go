@@ -18,6 +18,14 @@ func RegisterHandler(db *sql.DB) echo.HandlerFunc {
 			return utils.BuildErrorResponse(ctx, http.StatusBadRequest, "Invalid request payload")
 		}
 
+		var existingID int
+		err := db.QueryRow("SELECT id FROM users WHERE login = $1", user.Login).Scan(&existingID)
+		if err == nil {
+			return utils.BuildErrorResponse(ctx, http.StatusConflict, "User with this login already exists")
+		} else if err != sql.ErrNoRows {
+			return utils.BuildErrorResponse(ctx, http.StatusInternalServerError, "Failed to check user existence")
+		}
+
 		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 		if err != nil {
 			return utils.BuildErrorResponse(ctx, http.StatusInternalServerError, "Failed to hash password")
@@ -29,6 +37,8 @@ func RegisterHandler(db *sql.DB) echo.HandlerFunc {
 			return utils.BuildErrorResponse(ctx, http.StatusInternalServerError, "Failed to register user")
 		}
 
+		exitID := userID
+
 		token, err := auth.GenerateToken(userID)
 		if err != nil {
 			return utils.BuildErrorResponse(ctx, http.StatusInternalServerError, "Failed to generate token")
@@ -39,7 +49,7 @@ func RegisterHandler(db *sql.DB) echo.HandlerFunc {
 			return utils.BuildErrorResponse(ctx, http.StatusInternalServerError, "Failed to update user token")
 		}
 
-		return ctx.JSON(http.StatusCreated, map[string]string{"message": "User registered successfully", "token": token})
+		return ctx.JSON(http.StatusCreated, map[string]interface{}{"message": "User registered successfully", "token": token, "user_id": exitID})
 	}
 }
 
@@ -72,6 +82,6 @@ func LoginHandler(db *sql.DB) echo.HandlerFunc {
 			return utils.BuildErrorResponse(ctx, http.StatusInternalServerError, "Failed to update user token")
 		}
 
-		return ctx.JSON(http.StatusOK, map[string]string{"message": "Login successful", "token": token})
+		return ctx.JSON(http.StatusOK, map[string]interface{}{"message": "Login successful", "token": token, "user_id": userID})
 	}
 }
