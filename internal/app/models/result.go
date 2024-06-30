@@ -8,7 +8,9 @@ type Result struct {
 	GameMode  string    `json:"game_mode"`
 	StartTime time.Time `json:"start_time"`
 	Duration  time.Time `json:"duration"`
-	Misstakes int       `json:"misstakes"`
+	Mistakes  int       `json:"misstakes"`
 	Accuracy  float64   `json:"accuracy"`
 	Words     int       `json:"count_words"`
+	WPN       float64   `json:"wpn"`
+	CPN       float64   `json:"cpn"`
 }

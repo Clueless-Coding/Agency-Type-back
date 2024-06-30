@@ -29,7 +29,7 @@ func GlobalRecordsHandler(db *sql.DB) echo.HandlerFunc {
 		var results []models.Result
 		for rows.Next() {
 			var result models.Result
-			if err := rows.Scan(&result.ID, &result.UserID, &result.GameMode, &result.StartTime, &result.Duration, &result.Misstakes, &result.Accuracy, &result.Words); err != nil {
+			if err := rows.Scan(&result.ID, &result.UserID, &result.GameMode, &result.StartTime, &result.Duration, &result.Mistakes, &result.Accuracy, &result.Words, &result.WPN, &result.CPN); err != nil {
 				fmt.Println(err)
 				return utils.BuildErrorResponse(ctx, http.StatusInternalServerError, "Failed to scan results")
 			}
@@ -58,7 +58,7 @@ func UserRecordsHandler(db *sql.DB) echo.HandlerFunc {
 			`WITH record_results AS (
             SELECT *, ROW_NUMBER() OVER (PARTITION BY game_mode ORDER BY duration ASC) AS rn
             FROM results WHERE user_id = $1)
-            SELECT id, user_id, game_mode, start_time, duration, misstakes, accuracy, count_words FROM record_results WHERE rn = 1;`,
+            SELECT id, user_id, game_mode, start_time, duration, misstakes, accuracy, count_words, wpn, cpn FROM record_results WHERE rn = 1;`,
 			userID)
 
 		if err != nil {
@@ -70,7 +70,7 @@ func UserRecordsHandler(db *sql.DB) echo.HandlerFunc {
 		var results []models.Result
 		for rows.Next() {
 			var result models.Result
-			if err := rows.Scan(&result.ID, &result.UserID, &result.GameMode, &result.StartTime, &result.Duration, &result.Misstakes, &result.Accuracy, &result.Words); err != nil {
+			if err := rows.Scan(&result.ID, &result.UserID, &result.GameMode, &result.StartTime, &result.Duration, &result.Mistakes, &result.Accuracy, &result.Words, &result.WPN, &result.CPN); err != nil {
 				fmt.Println(err)
 				return utils.BuildErrorResponse(ctx, http.StatusInternalServerError, "Failed to scan results")
 			}
