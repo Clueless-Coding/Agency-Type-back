@@ -19,7 +19,7 @@ func GlobalRecordsHandler(db *sql.DB) echo.HandlerFunc {
 			return utils.BuildErrorResponse(ctx, http.StatusBadRequest, "Mode parameter is required")
 		}
 
-		rows, err := db.Query("SELECT * FROM results WHERE game_mode = $1 ORDER BY duration", gamemode)
+		rows, err := db.Query("SELECT * FROM results WHERE game_mode = $1 ORDER BY wpm DESC", gamemode)
 		if err != nil {
 			fmt.Println(err)
 			return utils.BuildErrorResponse(ctx, http.StatusInternalServerError, "Failed to fetch results")
@@ -56,7 +56,7 @@ func UserRecordsHandler(db *sql.DB) echo.HandlerFunc {
 
 		rows, err := db.Query(
 			`WITH record_results AS (
-            SELECT *, ROW_NUMBER() OVER (PARTITION BY game_mode ORDER BY duration ASC) AS rn
+            SELECT *, ROW_NUMBER() OVER (PARTITION BY game_mode ORDER BY wpm DESC) AS rn
             FROM results WHERE user_id = $1)
             SELECT id, user_id, game_mode, start_time, duration, mistakes, accuracy, count_words, wpm, cpm FROM record_results WHERE rn = 1;`,
 			userID)
