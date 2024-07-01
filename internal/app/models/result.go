@@ -7,7 +7,7 @@ type Result struct {
 	UserID    int       `json:"user_id"`
 	GameMode  string    `json:"game_mode"`
 	StartTime time.Time `json:"start_time"`
-	Duration  time.Time `json:"duration"`
+	Duration  float64   `json:"duration"`
 	Mistakes  int       `json:"mistakes"`
 	Accuracy  float64   `json:"accuracy"`
 	Words     int       `json:"count_words"`
