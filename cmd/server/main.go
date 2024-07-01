@@ -19,7 +19,9 @@ func main() {
 
 	app := echo.New()
 
-	app.Use(echoMiddleware.Logger())
+	app.Use(echoMiddleware.LoggerWithConfig(echoMiddleware.LoggerConfig{
+		Format: "time = ${time_rfc3339}\nmethod = ${method}, uri = ${uri}, status = ${status}\nheader = ${header:token}, query = ${query:user_id}\nremote_ip = ${remote_ip}, host = ${host}\nuser_agent = ${user_agent}\nlatency_human = ${latency_human} \nbytes_in = ${bytes_in}, bytes_out = ${bytes_out}\n\n",
+	}))
 	app.Use(echoMiddleware.Recover())
 	app.Use(echoMiddleware.CORS())
 
